@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درس القواعد: Too and Enough</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-navy: #1E3A8A;
+            --primary-purple: #6B21A8;
+            --primary-turq: #0D9488;
+            --accent-gold: #D97706;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+        .en-text {
+            font-family: 'Nunito', sans-serif;
+            direction: ltr;
+            display: inline-block;
+        }
+        .en-block {
+            font-family: 'Nunito', sans-serif;
+            direction: ltr;
+            text-align: left;
+        }
+        
+        /* Custom UI Elements */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-navy), var(--primary-purple));
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 33, 168, 0.3);
+        }
+        .btn-secondary {
+            background-color: var(--primary-turq);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #0f766e;
+        }
+        .btn-gold {
+            background-color: var(--accent-gold);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            background-color: #b45309;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        /* Certificate Styles */
+        #certificate-container {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #e2e8f0;
+            z-index: 1000;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        .cert-wrapper {
+            background: white;
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 1.414 / 1; /* A4 Landscape ratio */
+            margin: auto;
+            position: relative;
+            border: 15px solid var(--primary-navy);
+            box-shadow: 0 0 0 5px var(--accent-gold) inset, 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: radial-gradient(circle at center, #ffffff 0%, #f8fafc 100%);
+        }
+        .cert-corner {
+            position: absolute;
+            width: 60px; height: 60px;
+            border: 3px solid var(--accent-gold);
+        }
+        .cert-tl { top: 15px; left: 15px; border-right: none; border-bottom: none; }
+        .cert-tr { top: 15px; right: 15px; border-left: none; border-bottom: none; }
+        .cert-bl { bottom: 15px; left: 15px; border-right: none; border-top: none; }
+        .cert-br { bottom: 15px; right: 15px; border-left: none; border-top: none; }
+        
+        .hide-on-cert { display: flex; }
+        .cert-mode .hide-on-cert { display: none !important; }
+        
+        /* Custom Radio Buttons */
+        .option-label {
+            display: block;
+            position: relative;
+            cursor: pointer;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.2s;
+        }
+        .option-label:hover {
+            border-color: var(--primary-turq);
+            background-color: #f0fdfa;
+        }
+        .option-input:checked + .option-label {
+            border-color: var(--primary-navy);
+            background-color: #eff6ff;
+        }
+        .option-input {
+            display: none;
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-turq), var(--primary-navy));
+            transition: width 0.3s ease;
+        }
+
+        /* Syntax highlighting */
+        .syntax-word { color: var(--primary-purple); font-weight: bold; }
+        .syntax-noun { color: var(--primary-navy); font-weight: bold; }
+        .syntax-adj { color: var(--accent-gold); font-weight: bold; }
+        .syntax-verb { color: var(--primary-turq); font-weight: bold; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-gray-800">الوحدة 11: Form, Meaning and Function</h1>
+                <p class="text-sm text-gray-500 en-text font-bold">Too and Enough</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-sm font-semibold text-purple-700 bg-purple-100 px-3 py-1 rounded-full border border-purple-200">
+                    <i class="fas fa-chalkboard-teacher mr-1"></i> Teacher: Mohammad AlFaifi
+                </span>
+                <button id="audio-toggle" class="text-gray-500 hover:text-gray-800 transition" onclick="toggleAudio()">
+                    <i class="fas fa-volume-up text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div class="bg-gray-100 text-center py-1 text-xs font-semibold text-gray-600">
+            افهم القاعدة &bull; تدرّب &bull; اختبر نفسك
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex flex-col items-center justify-start p-4 w-full max-w-4xl mx-auto mt-4">
+        
+        <!-- 1. Intro Screen -->
+        <section id="intro-screen" class="glass-panel w-full rounded-2xl p-8 text-center animate-fade-in">
+            <div class="w-24 h-24 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                <i class="fas fa-book-open text-4xl text-blue-600"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">أهلاً بك في درس القواعد</h2>
+            <h3 class="text-2xl text-blue-700 font-extrabold en-text mb-6">Too and Enough</h3>
+            <p class="text-gray-600 mb-8 text-lg">سنتعلم اليوم كيف نستخدم هاتين الكلمتين للتعبير عن الكميات والصفات بشكل صحيح وبسيط.</p>
+            
+            <div class="max-w-sm mx-auto mb-8 text-right">
+                <label for="student-name" class="block text-sm font-bold text-gray-700 mb-2">اكتب اسمك للبدء ولإصدار الشهادة:</label>
+                <input type="text" id="student-name" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 transition text-lg" placeholder="الاسم الثلاثي...">
+                <p id="name-error" class="text-red-500 text-sm mt-2 hidden">يرجى كتابة اسمك قبل البدء.</p>
+            </div>
+            
+            <button onclick="startLearning()" class="btn-primary text-xl px-10 py-4 rounded-xl font-bold w-full max-w-sm shadow-lg">
+                ابدأ التعلّم <i class="fas fa-arrow-left mr-2"></i>
+            </button>
+        </section>
+
+        <!-- 2. Learn Screen -->
+        <section id="learn-screen" class="w-full hidden">
+            <!-- Navigation Breadcrumbs -->
+            <div class="flex justify-between items-center mb-4">
+                <button onclick="goToHome()" class="text-gray-500 hover:text-blue-600 font-semibold text-sm">
+                    <i class="fas fa-home ml-1"></i> الرئيسية
+                </button>
+                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold">قسم الشرح</span>
+            </div>
+
+            <div class="progress-bar mb-6"><div id="learn-progress" class="progress-fill" style="width: 20%;"></div></div>
+
+            <!-- Card Container -->
+            <div id="rule-card-container" class="glass-panel rounded-2xl p-6 md:p-8 min-h-[400px] relative animate-fade-in">
+                <!-- Content injected via JS -->
+            </div>
+
+            <!-- Controls -->
+            <div class="flex justify-between mt-6">
+                <button id="btn-prev-rule" onclick="prevRule()" class="px-6 py-3 rounded-xl font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition hidden">
+                    <i class="fas fa-arrow-right ml-2"></i> السابق
+                </button>
+                <button id="btn-next-rule" onclick="nextRule()" class="px-6 py-3 rounded-xl font-bold btn-primary mr-auto">
+                    التالي <i class="fas fa-arrow-left mr-2"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 3. Practice Screen -->
+        <section id="practice-screen" class="w-full hidden">
+             <div class="flex justify-between items-center mb-4">
+                <span class="text-gray-500 font-semibold text-sm">التدريب التفاعلي</span>
+                <span class="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-bold">بدون درجات</span>
+            </div>
+            <div class="progress-bar mb-6"><div id="practice-progress" class="progress-fill" style="width: 0%;"></div></div>
+
+            <div class="glass-panel rounded-2xl p-6 md:p-8 animate-fade-in border-t-4 border-teal-500">
+                <div class="text-center mb-6">
+                    <span id="practice-counter" class="text-gray-400 font-bold text-sm">سؤال 1 / 12</span>
+                </div>
+                
+                <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2 text-right">اختر الكلمة الصحيحة لإكمال الجملة:</h3>
+                
+                <div class="bg-gray-50 p-4 md:p-6 rounded-xl mb-6 en-block border border-gray-200 shadow-inner">
+                    <p id="practice-question-text" class="text-xl md:text-2xl font-bold text-gray-900"></p>
+                </div>
+
+                <div id="practice-options" class="grid grid-cols-1 md:grid-cols-2 gap-3 en-block">
+                    <!-- Options injected via JS -->
+                </div>
+
+                <div id="practice-feedback" class="mt-6 hidden p-4 rounded-xl text-right">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div id="feedback-icon" class="text-2xl"></div>
+                        <h4 id="feedback-title" class="font-bold text-lg"></h4>
+                    </div>
+                    <p id="feedback-desc" class="text-gray-700"></p>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button id="btn-practice-action" onclick="checkPracticeAnswer()" class="btn-secondary px-8 py-3 rounded-xl font-bold shadow-md">
+                        تحقق من الإجابة
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Quiz Intro & Screen -->
+        <section id="quiz-intro" class="glass-panel w-full rounded-2xl p-8 text-center hidden animate-fade-in border-t-4 border-purple-600">
+            <div class="w-20 h-20 mx-auto bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                <i class="fas fa-clipboard-check text-4xl text-purple-600"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">التقييم النهائي</h2>
+            <p class="text-gray-600 mb-6 text-lg">الآن، حان وقت اختبار فهمك. يتكون هذا التقييم من 15 سؤالاً.</p>
+            <ul class="text-right text-gray-600 mb-8 max-w-md mx-auto list-disc list-inside space-y-2">
+                <li>اختر الإجابة الأنسب لكل سؤال.</li>
+                <li>لا يوجد تلميحات أثناء الاختبار.</li>
+                <li>ستظهر النتيجة والشهادة بعد الانتهاء.</li>
+            </ul>
+            <button onclick="startQuiz()" class="btn-primary text-xl px-10 py-4 rounded-xl font-bold w-full max-w-sm shadow-lg">
+                ابدأ الاختبار الآن
+            </button>
+        </section>
+
+        <section id="quiz-screen" class="w-full hidden">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-gray-500 font-semibold text-sm">التقييم النهائي</span>
+                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-bold">اختبار</span>
+            </div>
+            <div class="progress-bar mb-6"><div id="quiz-progress" class="progress-fill" style="width: 0%;"></div></div>
+
+            <div class="glass-panel rounded-2xl p-6 md:p-8 animate-fade-in border-t-4 border-purple-500">
+                <div class="text-center mb-6">
+                    <span id="quiz-counter" class="text-gray-400 font-bold text-sm">سؤال 1 / 15</span>
+                </div>
+                
+                <h3 class="text-xl font-bold text-gray-800 mb-4 text-right">اختر الإجابة الصحيحة:</h3>
+                
+                <div class="bg-gray-50 p-4 md:p-6 rounded-xl mb-6 en-block border border-gray-200">
+                    <p id="quiz-question-text" class="text-xl md:text-2xl font-bold text-gray-900"></p>
+                </div>
+
+                <div id="quiz-options" class="grid grid-cols-1 md:grid-cols-2 gap-3 en-block">
+                    <!-- Options injected via JS -->
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button id="btn-quiz-next" onclick="nextQuizQuestion()" class="btn-primary px-8 py-3 rounded-xl font-bold shadow-md opacity-50 cursor-not-allowed" disabled>
+                        التالي <i class="fas fa-arrow-left mr-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Result Screen -->
+        <section id="result-screen" class="w-full hidden animate-fade-in">
+            <div class="glass-panel rounded-2xl p-6 md:p-10 text-center mb-6">
+                <div id="result-icon" class="w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-4 text-5xl"></div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">النتيجة النهائية</h2>
+                <p id="result-name" class="text-xl text-gray-600 mb-6 font-bold"></p>
+                
+                <div class="flex justify-center items-center gap-8 mb-8">
+                    <div class="text-center">
+                        <div id="result-score" class="text-5xl font-extrabold text-blue-600 mb-1 en-text"></div>
+                        <div class="text-gray-500 font-semibold">الدرجة</div>
+                    </div>
+                    <div class="h-16 w-px bg-gray-300"></div>
+                    <div class="text-center">
+                        <div id="result-percent" class="text-4xl font-bold text-purple-600 mb-1 en-text"></div>
+                        <div class="text-gray-500 font-semibold">النسبة</div>
+                    </div>
+                </div>
+
+                <p id="result-message" class="text-lg font-bold mb-8 p-4 rounded-xl"></p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="showCertificate()" class="btn-gold px-6 py-3 rounded-xl font-bold shadow-md text-lg">
+                        <i class="fas fa-certificate mr-2"></i> عرض الشهادة للحفظ
+                    </button>
+                    <button onclick="restartQuiz()" class="bg-gray-200 text-gray-800 hover:bg-gray-300 px-6 py-3 rounded-xl font-bold transition">
+                        <i class="fas fa-redo mr-2"></i> إعادة الاختبار
+                    </button>
+                </div>
+            </div>
+
+            <!-- Review Errors -->
+            <div id="errors-container" class="glass-panel rounded-2xl p-6 hidden">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2"><i class="fas fa-clipboard-list mr-2 text-red-500"></i> مراجعة الأخطاء:</h3>
+                <div id="errors-list" class="space-y-4"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Certificate Overlay -->
+    <div id="certificate-container">
+        <!-- Control buttons (Hidden during screenshot mode) -->
+        <div class="hide-on-cert fixed top-4 right-4 z-50 flex gap-2">
+            <button onclick="closeCertificate()" class="bg-red-500 text-white w-12 h-12 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center text-xl" title="إغلاق الشهادة">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="hide-on-cert fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-gray-900 bg-opacity-90 text-white px-6 py-4 rounded-xl shadow-2xl flex flex-col items-center w-[90%] max-w-md">
+            <p class="text-center text-sm mb-3 font-semibold leading-relaxed">
+                <i class="fas fa-camera text-yellow-400 mr-1"></i> لحفظ شهادتك: التقط "لقطة شاشة" (Screenshot) بجهازك الآن. <br> يمكنك قص الحواف من تطبيق الصور لاحقاً.
+            </p>
+            <div class="flex gap-3">
+                <button onclick="toggleScreenshotMode()" id="btn-screenshot-mode" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold shadow transition">
+                    <i class="fas fa-expand mr-1"></i> إخفاء الأزرار للتصوير
+                </button>
+                <button id="btn-share" onclick="nativeShare()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-bold shadow transition hidden">
+                    <i class="fas fa-share-alt mr-1"></i> مشاركة
+                </button>
+            </div>
+        </div>
+        <div id="screenshot-restore-btn" class="fixed top-4 right-4 z-50 hidden">
+            <button onclick="toggleScreenshotMode()" class="bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-xl animate-pulse">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+
+        <!-- The Certificate Design -->
+        <div class="cert-wrapper" id="certificate-content">
+            <div class="cert-corner cert-tl"></div>
+            <div class="cert-corner cert-tr"></div>
+            <div class="cert-corner cert-bl"></div>
+            <div class="cert-corner cert-br"></div>
+            
+            <div class="mb-4 text-accent-gold text-5xl">
+                <i class="fas fa-award"></i>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 mb-2 tracking-wide en-text uppercase">Certificate of Completion</h1>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mb-8">شهادة إنجاز</h2>
+            
+            <p class="text-lg text-gray-600 mb-4 font-semibold">يشهد هذا التطبيق التعليمي بأن الطالب/ـة:</p>
+            
+            <div class="border-b-2 border-gray-400 min-w-[300px] pb-2 mb-6">
+                <h3 id="cert-name" class="text-3xl font-bold text-purple-800 text-center"></h3>
+            </div>
+            
+            <p class="text-lg text-gray-700 mb-4 leading-relaxed font-semibold">
+                قد أكمل أنشطة درس القواعد والتقييم النهائي للدرس:<br>
+                <span class="en-text font-bold text-xl text-blue-800 mt-2 block">Unit 11: Too and Enough</span>
+            </p>
+            
+            <div class="flex justify-center items-center gap-10 mt-6 mb-8 w-full max-w-md">
+                <div class="text-center bg-gray-50 p-4 rounded-xl border border-gray-200 w-1/2">
+                    <div class="text-sm text-gray-500 mb-1 font-bold">الدرجة</div>
+                    <div id="cert-score" class="text-2xl font-bold text-blue-700 en-text"></div>
+                </div>
+                <div class="text-center bg-gray-50 p-4 rounded-xl border border-gray-200 w-1/2">
+                    <div class="text-sm text-gray-500 mb-1 font-bold">النسبة</div>
+                    <div id="cert-percent" class="text-2xl font-bold text-purple-700 en-text"></div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-end w-full px-10 mt-4 border-t pt-6 border-gray-200">
+                <div class="text-right">
+                    <p class="text-sm text-gray-500 font-bold mb-1">المعلم (Teacher):</p>
+                    <p class="font-bold text-lg text-gray-800 en-text">Mohammad AlFaifi</p>
+                </div>
+                <div class="text-left">
+                    <p class="text-sm text-gray-500 font-bold mb-1">التاريخ (Date):</p>
+                    <p id="cert-date" class="font-bold text-lg text-gray-800 en-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Data Configuration
+        const ruleCards = [
+            {
+                title: "مقدمة: Too و Enough",
+                content: `
+                    <p class="text-lg mb-4">في هذا الدرس سنتعلم كيف نستخدم <span class="syntax-word">too</span> و <span class="syntax-word">enough</span> للتعبير عن مقادير الأشياء والصفات.</p>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700 mb-4 text-right">
+                        <li><span class="syntax-word en-text font-bold">Too</span>: تعني (أكثر من اللازم). غالباً تعطي معنى سلبياً، أي أن الشيء زاد عن الحد المقبول.</li>
+                        <li><span class="syntax-word en-text font-bold">Enough</span>: تعني (بشكل كافٍ). تعني أن الكمية أو الصفة مناسبة وتلبي الحاجة.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "القاعدة الأولى: Too + صفة",
+                content: `
+                    <p class="text-lg mb-4">نستخدم <span class="syntax-word en-text">too</span> قبل الصفة لبيان أنها زائدة عن الحد.</p>
+                    <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500 mb-4 en-block text-center">
+                        <span class="text-xl font-bold"><span class="syntax-word">too</span> + <span class="syntax-adj">adjective</span> (صفة)</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white p-3 rounded shadow-sm border border-gray-100">
+                            <p class="en-text text-lg mb-1">The soup is <span class="syntax-word">too</span> <span class="syntax-adj">salty</span>.</p>
+                            <p class="text-sm text-gray-500">الحساء مالح جداً (أكثر من اللازم، لا أستطيع شربه).</p>
+                        </div>
+                    </div>
+                `,
+                checkQuestion: {
+                    q: "The weather is ____ hot today.",
+                    options: ["too", "enough"],
+                    ans: 0
+                }
+            },
+            {
+                title: "القاعدة الثانية: Too much / Too many",
+                content: `
+                    <p class="text-lg mb-4">نستخدمهما مع الأسماء (Nouns) بمعنى كمية أو عدد أكثر من اللازم.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-purple-50 p-3 rounded-xl border-t-2 border-purple-300">
+                            <p class="font-bold en-text text-center text-purple-800"><span class="syntax-word">too much</span> + Noncount Noun</p>
+                            <p class="text-sm text-center mb-2 text-gray-600">(مع الأسماء التي لا تُعد: ملح، وقت، سكر)</p>
+                            <p class="en-text text-sm">There is <span class="syntax-word">too much</span> <span class="syntax-noun">salt</span>.</p>
+                            <p class="text-xs text-gray-500 text-right mt-1">يوجد ملح أكثر من اللازم.</p>
+                        </div>
+                        <div class="bg-teal-50 p-3 rounded-xl border-t-2 border-teal-300">
+                            <p class="font-bold en-text text-center text-teal-800"><span class="syntax-word">too many</span> + Count Noun</p>
+                            <p class="text-sm text-center mb-2 text-gray-600">(مع الأسماء التي تُعد بصيغة الجمع: جزر، سيارات)</p>
+                            <p class="en-text text-sm">There are <span class="syntax-word">too many</span> <span class="syntax-noun">carrots</span>.</p>
+                            <p class="text-xs text-gray-500 text-right mt-1">يوجد جزر أكثر من اللازم.</p>
+                        </div>
+                    </div>
+                `,
+                checkQuestion: {
+                    q: "I have too ____ work to do.",
+                    options: ["many", "much"],
+                    ans: 1 // work is noncount
+                }
+            },
+            {
+                title: "القاعدة الثالثة: صفة + Enough",
+                content: `
+                    <p class="text-lg mb-4">انتبه! كلمة <span class="syntax-word en-text">enough</span> تأتي <strong>بعد</strong> الصفة، وليس قبلها.</p>
+                    <div class="bg-yellow-50 p-4 rounded-xl border-l-4 border-yellow-500 mb-4 en-block text-center">
+                        <span class="text-xl font-bold"><span class="syntax-adj">adjective</span> (صفة) + <span class="syntax-word">enough</span></span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-white p-3 rounded shadow-sm border border-gray-100">
+                            <p class="en-text text-lg mb-1">The soup is <span class="syntax-adj">salty</span> <span class="syntax-word">enough</span>.</p>
+                            <p class="text-sm text-gray-500">الحساء مالح بدرجة كافية (لا تضف المزيد من الملح).</p>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded border border-red-200">
+                            <p class="text-sm font-bold text-red-600 mb-1"><i class="fas fa-times-circle"></i> خطأ شائع:</p>
+                            <p class="en-text text-gray-500 line-through">He is enough tall.</p>
+                            <p class="en-text text-green-700 font-bold mt-1">He is tall enough. <i class="fas fa-check-circle"></i></p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "القاعدة الرابعة: Enough + اسم",
+                content: `
+                    <p class="text-lg mb-4">عند استخدام <span class="syntax-word en-text">enough</span> مع الأسماء (معدودة أو غير معدودة)، فإنها تأتي <strong>قبل</strong> الاسم.</p>
+                    <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500 mb-4 en-block text-center">
+                        <span class="text-xl font-bold"><span class="syntax-word">enough</span> + <span class="syntax-noun">noun</span> (اسم)</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-white p-3 rounded shadow-sm border border-gray-100">
+                            <p class="en-text text-lg mb-1">We have <span class="syntax-word">enough</span> <span class="syntax-noun">eggs</span>.</p>
+                            <p class="text-sm text-gray-500">لدينا بيض كافٍ. (اسم معدود)</p>
+                        </div>
+                        <div class="bg-white p-3 rounded shadow-sm border border-gray-100">
+                            <p class="en-text text-lg mb-1">We don't have <span class="syntax-word">enough</span> <span class="syntax-noun">sugar</span>.</p>
+                            <p class="text-sm text-gray-500">ليس لدينا سكر كافٍ. (اسم غير معدود)</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "القاعدة الخامسة: إضافة فعل مصدر (Infinitive)",
+                content: `
+                    <p class="text-lg mb-4">يمكن أن يتبع التركيبات السابقة فعل في صيغة المصدر <span class="syntax-verb en-text">(to + فعل)</span> لتوضيح السبب أو النتيجة.</p>
+                    <div class="bg-gray-100 p-4 rounded-xl border border-gray-300 mb-4 en-block">
+                        <p class="mb-3 text-lg"><span class="text-gray-500">...</span> <span class="syntax-word">too/enough</span> <span class="text-gray-500">...</span> + <span class="syntax-verb">to</span> + <span class="syntax-verb">Verb</span></p>
+                        <div class="bg-white p-3 rounded shadow-sm mb-2">
+                            <p class="en-text mb-1">The soup is too hot <span class="syntax-verb">to eat</span>.</p>
+                            <p class="text-sm text-gray-500 text-right">الحساء حار جداً لدرجة لا يمكن أكله.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <p class="en-text mb-1">I have enough vegetables <span class="syntax-verb">to make</span> a salad.</p>
+                            <p class="text-sm text-gray-500 text-right">لدي خضروات كافية لصنع سلطة.</p>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        const practiceQuestions = [
+            { q: "I don't have ____ time to cook dinner.", options: ["too", "enough", "many", "much"], correct: 1, exp: "نستخدم enough قبل الاسم (time) لتعني 'وقت كافٍ'." },
+            { q: "This restaurant is ____ crowded. Let's eat somewhere else.", options: ["too", "enough", "many", "much"], correct: 0, exp: "نستخدم too قبل الصفة (crowded) لتعني 'مزدحم جداً'." },
+            { q: "There were too ____ sandwiches, but not enough salad.", options: ["much", "enough", "many", "too"], correct: 2, exp: "sandwiches اسم معدود جمع، لذلك نستخدم too many." },
+            { q: "No more, thank you. That's ____ rice for me.", options: ["enough", "too", "many", "much"], correct: 0, exp: "enough قبل الاسم (rice) تعني 'أرز كافٍ'." },
+            { q: "It's ____ hot in here. Can we turn on the air conditioner?", options: ["enough", "many", "much", "too"], correct: 3, exp: "too قبل الصفة (hot) لتعني 'حار جداً'." },
+            { q: "These shoes are ____ big.", options: ["enough", "many", "too", "much"], correct: 2, exp: "too قبل الصفة (big)." },
+            { q: "Those shoes aren't big ____.", options: ["too", "enough", "much", "many"], correct: 1, exp: "enough تأتي بعد الصفة (big)." },
+            { q: "There are too ____ people in this restaurant. We can't find a table.", options: ["much", "enough", "too", "many"], correct: 3, exp: "people اسم معدود (جمع)، نستخدم too many." },
+            { q: "There are too ____ desserts to choose from. I want to try them all!", options: ["many", "much", "enough", "too"], correct: 0, exp: "desserts اسم معدود (حلويات)، نستخدم too many." },
+            { q: "I can't eat all this. There's too ____ pasta on my plate.", options: ["many", "much", "enough", "too"], correct: 1, exp: "pasta اسم غير معدود، نستخدم too much." },
+            { q: "It's too late ____.", options: ["apologizing", "apologize", "to apologize", "apologizes"], correct: 2, exp: "نستخدم فعل المصدر (to + verb) بعد تركيب too/enough." },
+            { q: "Do we have enough eggs ____ a cake?", options: ["make", "making", "makes", "to make"], correct: 3, exp: "نستخدم (to make) لتكملة المعنى: بيض كافٍ لصنع كيكة." }
+        ];
+
+        const quizQuestions = [
+            { q: "I can't drink this coffee. It's ____ hot.", options: ["enough", "many", "much", "too"], correct: 3 },
+            { q: "Is the tea sweet ____ for you?", options: ["too", "enough", "many", "much"], correct: 1 },
+            { q: "We don't have ____ chairs for everyone.", options: ["too", "much", "enough", "many"], correct: 2 },
+            { q: "You put too ____ salt in the soup.", options: ["many", "much", "enough", "too"], correct: 1 },
+            { q: "I made too ____ mistakes on the test.", options: ["much", "many", "enough", "too"], correct: 1 },
+            { q: "He is strong ____ to lift this heavy box.", options: ["enough", "too", "much", "many"], correct: 0 },
+            { q: "This box is ____ heavy for me to lift.", options: ["enough", "too", "many", "much"], correct: 1 },
+            { q: "I don't have ____ money to buy that phone.", options: ["too", "many", "much", "enough"], correct: 3 },
+            { q: "There is too ____ traffic today. I will be late.", options: ["many", "much", "enough", "too"], correct: 1 },
+            { q: "I have enough apples ____ an apple pie.", options: ["baking", "bake", "to bake", "bakes"], correct: 2 },
+            { q: "He is too young ____ this car.", options: ["driving", "drive", "drives", "to drive"], correct: 3 },
+            { q: "The soup isn't warm ____. Please heat it up.", options: ["too", "enough", "much", "many"], correct: 1 },
+            { q: "There are too ____ questions to answer in 5 minutes.", options: ["much", "many", "enough", "too"], correct: 1 },
+            { q: "I didn't get ____ sleep last night. I'm tired.", options: ["too", "many", "enough", "much"], correct: 2 },
+            { q: "The weather is ____ cold to go swimming.", options: ["enough", "many", "too", "much"], correct: 2 }
+        ];
+
+        // State variables
+        let userName = "";
+        let audioEnabled = true;
+        let currentLearnIndex = 0;
+        let currentPracticeIndex = 0;
+        let practiceAttempted = false;
+        let quizIndex = 0;
+        let quizAnswers = [];
+        let quizScore = 0;
+        let screenshotMode = false;
+
+        // Audio Context (Initialize on first user interaction)
+        let audioCtx;
+        function initAudio() {
+            if (!audioCtx && audioEnabled) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                } catch(e) {
+                    console.log("Audio not supported");
+                }
+            }
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const icon = document.querySelector('#audio-toggle i');
+            if(audioEnabled) {
+                icon.className = 'fas fa-volume-up text-xl';
+                initAudio();
+            } else {
+                icon.className = 'fas fa-volume-mute text-xl text-gray-400';
+            }
+        }
+
+        function playSound(type) {
+            if (!audioEnabled || !audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            if (type === 'correct') {
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(500, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.5);
+            } else if (type === 'wrong') {
+                oscillator.type = 'triangle';
+                oscillator.frequency.setValueAtTime(300, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.2);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.4);
+            } else if (type === 'tada') {
+                // simple success chord
+                const osc2 = audioCtx.createOscillator();
+                osc2.type = 'sine';
+                osc2.connect(gainNode);
+                oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc2.frequency.setValueAtTime(554.37, audioCtx.currentTime); // C#
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
+                oscillator.start(); osc2.start();
+                oscillator.stop(audioCtx.currentTime + 1); osc2.stop(audioCtx.currentTime + 1);
+            }
+        }
+
+        // Navigation
+        function hideAllScreens() {
+            ['intro-screen', 'learn-screen', 'practice-screen', 'quiz-intro', 'quiz-screen', 'result-screen'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+        }
+
+        function goToHome() {
+            hideAllScreens();
+            document.getElementById('intro-screen').classList.remove('hidden');
+        }
+
+        // Start Learning
+        function startLearning() {
+            initAudio();
+            const nameInput = document.getElementById('student-name').value.trim();
+            if (nameInput.length < 2) {
+                document.getElementById('name-error').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('name-error').classList.add('hidden');
+            userName = nameInput;
+            
+            currentLearnIndex = 0;
+            hideAllScreens();
+            document.getElementById('learn-screen').classList.remove('hidden');
+            renderLearnCard();
+        }
+
+        // Learn Section Logic
+        function renderLearnCard() {
+            const cardData = ruleCards[currentLearnIndex];
+            const container = document.getElementById('rule-card-container');
+            
+            // Progress
+            const progress = ((currentLearnIndex) / ruleCards.length) * 100;
+            document.getElementById('learn-progress').style.width = `${progress}%`;
+
+            let html = `
+                <h3 class="text-2xl font-bold text-blue-900 mb-6 border-b-2 border-blue-100 pb-2">${cardData.title}</h3>
+                <div class="mb-6">${cardData.content}</div>
+            `;
+
+            if (cardData.checkQuestion) {
+                html += `
+                    <div class="mt-6 bg-gray-50 p-4 rounded-xl border border-gray-200">
+                        <p class="font-bold text-gray-700 mb-2"><i class="fas fa-check-circle text-teal-500 mr-1"></i> تدريب سريع:</p>
+                        <p class="en-text text-lg mb-3 block text-left">${cardData.checkQuestion.q}</p>
+                        <div class="flex gap-2 justify-end en-block">
+                            ${cardData.checkQuestion.options.map((opt, i) => 
+                                `<button onclick="checkQuickAnswer(${i}, ${cardData.checkQuestion.ans}, this)" class="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition en-text">${opt}</button>`
+                            ).join('')}
+                        </div>
+                        <p id="quick-feedback" class="mt-2 text-sm font-bold text-right hidden"></p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+
+            document.getElementById('btn-prev-rule').classList.toggle('hidden', currentLearnIndex === 0);
+            
+            const nextBtn = document.getElementById('btn-next-rule');
+            if (currentLearnIndex === ruleCards.length - 1) {
+                nextBtn.innerHTML = `الانتقال للتدريب <i class="fas fa-dumbbell mr-2"></i>`;
+                nextBtn.className = "px-6 py-3 rounded-xl font-bold btn-secondary mr-auto";
+            } else {
+                nextBtn.innerHTML = `التالي <i class="fas fa-arrow-left mr-2"></i>`;
+                nextBtn.className = "px-6 py-3 rounded-xl font-bold btn-primary mr-auto";
+            }
+        }
+
+        function checkQuickAnswer(selected, correct, btn) {
+            const feedback = document.getElementById('quick-feedback');
+            const btns = btn.parentElement.querySelectorAll('button');
+            btns.forEach(b => b.disabled = true);
+            
+            feedback.classList.remove('hidden');
+            if (selected === correct) {
+                playSound('correct');
+                btn.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                feedback.innerHTML = '<span class="text-green-600">إجابة صحيحة! أحسنت.</span>';
+            } else {
+                playSound('wrong');
+                btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                btns[correct].classList.add('bg-green-100', 'border-green-500');
+                feedback.innerHTML = '<span class="text-red-600">حاول التركيز في القاعدة. الإجابة الصحيحة مظللة بالأخضر.</span>';
+            }
+        }
+
+        function nextRule() {
+            if (currentLearnIndex < ruleCards.length - 1) {
+                currentLearnIndex++;
+                renderLearnCard();
+            } else {
+                startPractice();
+            }
+        }
+
+        function prevRule() {
+            if (currentLearnIndex > 0) {
+                currentLearnIndex--;
+                renderLearnCard();
+            }
+        }
+
+        // Practice Logic
+        function startPractice() {
+            currentPracticeIndex = 0;
+            hideAllScreens();
+            document.getElementById('practice-screen').classList.remove('hidden');
+            renderPracticeQuestion();
+        }
+
+        function renderPracticeQuestion() {
+            practiceAttempted = false;
+            const qData = practiceQuestions[currentPracticeIndex];
+            
+            // Progress
+            document.getElementById('practice-counter').innerText = `سؤال ${currentPracticeIndex + 1} / ${practiceQuestions.length}`;
+            const progress = ((currentPracticeIndex) / practiceQuestions.length) * 100;
+            document.getElementById('practice-progress').style.width = `${progress}%`;
+
+            document.getElementById('practice-question-text').innerHTML = qData.q.replace('____', '<span class="text-teal-600 border-b-2 border-teal-600 px-4">____</span>');
+            
+            const optionsContainer = document.getElementById('practice-options');
+            optionsContainer.innerHTML = '';
+            
+            qData.options.forEach((opt, idx) => {
+                optionsContainer.innerHTML += `
+                    <div>
+                        <input type="radio" name="practice_opt" id="p_opt_${idx}" value="${idx}" class="option-input" onchange="enablePracticeCheck()">
+                        <label for="p_opt_${idx}" class="option-label text-lg font-bold">${opt}</label>
+                    </div>
+                `;
+            });
+
+            document.getElementById('practice-feedback').classList.add('hidden');
+            
+            const actionBtn = document.getElementById('btn-practice-action');
+            actionBtn.innerText = "تحقق من الإجابة";
+            actionBtn.className = "btn-secondary px-8 py-3 rounded-xl font-bold shadow-md opacity-50 cursor-not-allowed";
+            actionBtn.disabled = true;
+            actionBtn.onclick = checkPracticeAnswer;
+        }
+
+        function enablePracticeCheck() {
+            const actionBtn = document.getElementById('btn-practice-action');
+            if(!practiceAttempted) {
+                actionBtn.disabled = false;
+                actionBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        function checkPracticeAnswer() {
+            const selected = document.querySelector('input[name="practice_opt"]:checked');
+            if (!selected) return;
+
+            practiceAttempted = true;
+            const selectedVal = parseInt(selected.value);
+            const qData = practiceQuestions[currentPracticeIndex];
+            const isCorrect = (selectedVal === qData.correct);
+
+            // Disable inputs
+            document.querySelectorAll('input[name="practice_opt"]').forEach(r => r.disabled = true);
+
+            const feedback = document.getElementById('practice-feedback');
+            const icon = document.getElementById('feedback-icon');
+            const title = document.getElementById('feedback-title');
+            const desc = document.getElementById('feedback-desc');
+
+            feedback.classList.remove('hidden', 'bg-red-50', 'bg-green-50');
+            
+            if (isCorrect) {
+                playSound('correct');
+                feedback.classList.add('bg-green-50', 'border', 'border-green-200');
+                icon.innerHTML = '<i class="fas fa-check-circle text-green-500"></i>';
+                title.innerText = "إجابة صحيحة!";
+                title.className = "font-bold text-lg text-green-700";
+            } else {
+                playSound('wrong');
+                feedback.classList.add('bg-red-50', 'border', 'border-red-200');
+                icon.innerHTML = '<i class="fas fa-times-circle text-red-500"></i>';
+                title.innerText = "تحتاج إلى مراجعة";
+                title.className = "font-bold text-lg text-red-700";
+                
+                // Highlight correct answer
+                document.querySelector(`label[for="p_opt_${qData.correct}"]`).classList.add('border-green-500', 'bg-green-50');
+            }
+
+            desc.innerHTML = `<span class="font-semibold block mb-1 text-gray-800">التوضيح:</span> ${qData.exp}`;
+            
+            // Show complete sentence
+            const completedSentence = qData.q.replace('____', `<span class="${isCorrect ? 'text-green-600' : 'text-blue-600'} font-bold">${qData.options[qData.correct]}</span>`);
+            desc.innerHTML += `<div class="mt-3 pt-3 border-t border-gray-200 en-block text-gray-600">${completedSentence}</div>`;
+
+            const actionBtn = document.getElementById('btn-practice-action');
+            if (currentPracticeIndex < practiceQuestions.length - 1) {
+                actionBtn.innerText = "السؤال التالي";
+                actionBtn.className = "btn-primary px-8 py-3 rounded-xl font-bold shadow-md";
+                actionBtn.onclick = () => {
+                    currentPracticeIndex++;
+                    renderPracticeQuestion();
+                };
+            } else {
+                actionBtn.innerText = "إنهاء التدريب والانتقال للتقييم";
+                actionBtn.className = "btn-gold px-8 py-3 rounded-xl font-bold shadow-md";
+                actionBtn.onclick = showQuizIntro;
+            }
+        }
+
+        // Quiz Logic
+        function showQuizIntro() {
+            hideAllScreens();
+            document.getElementById('quiz-intro').classList.remove('hidden');
+        }
+
+        function startQuiz() {
+            quizIndex = 0;
+            quizAnswers = new Array(quizQuestions.length).fill(null);
+            hideAllScreens();
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            const qData = quizQuestions[quizIndex];
+            
+            document.getElementById('quiz-counter').innerText = `سؤال ${quizIndex + 1} / ${quizQuestions.length}`;
+            const progress = ((quizIndex) / quizQuestions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+
+            document.getElementById('quiz-question-text').innerHTML = qData.q.replace('____', '____');
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            qData.options.forEach((opt, idx) => {
+                const isChecked = quizAnswers[quizIndex] === idx ? 'checked' : '';
+                optionsContainer.innerHTML += `
+                    <div>
+                        <input type="radio" name="quiz_opt" id="q_opt_${idx}" value="${idx}" class="option-input" onchange="enableQuizNext()" ${isChecked}>
+                        <label for="q_opt_${idx}" class="option-label text-lg font-bold">${opt}</label>
+                    </div>
+                `;
+            });
+
+            enableQuizNext(); // Check if already answered (when going back, though back isn't implemented to keep it simple and strict, but good for state consistency)
+        }
+
+        function enableQuizNext() {
+            const nextBtn = document.getElementById('btn-quiz-next');
+            const selected = document.querySelector('input[name="quiz_opt"]:checked');
+            
+            if (selected) {
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                nextBtn.disabled = true;
+                nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            
+            if (quizIndex === quizQuestions.length - 1) {
+                nextBtn.innerHTML = `إنهاء الاختبار <i class="fas fa-check-double mr-2"></i>`;
+                nextBtn.classList.add('btn-gold');
+                nextBtn.classList.remove('btn-primary');
+            } else {
+                nextBtn.innerHTML = `التالي <i class="fas fa-arrow-left mr-2"></i>`;
+                nextBtn.classList.add('btn-primary');
+                nextBtn.classList.remove('btn-gold');
+            }
+        }
+
+        function nextQuizQuestion() {
+            const selected = document.querySelector('input[name="quiz_opt"]:checked');
+            if (selected) {
+                quizAnswers[quizIndex] = parseInt(selected.value);
+            }
+
+            if (quizIndex < quizQuestions.length - 1) {
+                quizIndex++;
+                renderQuizQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            quizScore = 0;
+            let errorsHTML = '';
+            
+            quizAnswers.forEach((ans, idx) => {
+                const q = quizQuestions[idx];
+                if (ans === q.correct) {
+                    quizScore++;
+                } else {
+                    const studentAns = ans !== null ? q.options[ans] : "لم يُجب";
+                    const correctAns = q.options[q.correct];
+                    
+                    errorsHTML += `
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-right">
+                            <p class="en-text text-lg font-bold text-gray-800 mb-2 border-b border-red-200 pb-2 block text-left">${q.q}</p>
+                            <div class="flex flex-col gap-1 text-sm">
+                                <p><span class="text-gray-600">إجابتك:</span> <span class="en-text text-red-600 font-bold line-through ml-2">${studentAns}</span> <i class="fas fa-times text-red-500"></i></p>
+                                <p><span class="text-gray-600">الإجابة الصحيحة:</span> <span class="en-text text-green-600 font-bold ml-2">${correctAns}</span> <i class="fas fa-check text-green-500"></i></p>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            const percent = Math.round((quizScore / quizQuestions.length) * 100);
+            playSound('tada');
+
+            hideAllScreens();
+            document.getElementById('result-screen').classList.remove('hidden');
+            
+            document.getElementById('result-name').innerText = `الطالب/ـة: ${userName}`;
+            document.getElementById('result-score').innerText = `${quizScore} / ${quizQuestions.length}`;
+            document.getElementById('result-percent').innerText = `${percent}%`;
+
+            const msgEl = document.getElementById('result-message');
+            const iconEl = document.getElementById('result-icon');
+            
+            if (percent >= 90) {
+                msgEl.innerText = "ممتاز! أداء رائع وفهم عميق للقاعدة.";
+                msgEl.className = "text-lg font-bold mb-8 p-4 rounded-xl bg-green-100 text-green-800 border border-green-200";
+                iconEl.innerHTML = '<i class="fas fa-trophy text-yellow-500"></i>';
+                iconEl.className = "w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-4 text-5xl bg-green-50";
+            } else if (percent >= 70) {
+                msgEl.innerText = "جيد جداً! فهمت معظم القواعد، راجع أخطائك لتصبح أفضل.";
+                msgEl.className = "text-lg font-bold mb-8 p-4 rounded-xl bg-blue-100 text-blue-800 border border-blue-200";
+                iconEl.innerHTML = '<i class="fas fa-star text-blue-500"></i>';
+                iconEl.className = "w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-4 text-5xl bg-blue-50";
+            } else {
+                msgEl.innerText = "تحتاج إلى مزيد من المراجعة. لا بأس، يمكنك إعادة المحاولة!";
+                msgEl.className = "text-lg font-bold mb-8 p-4 rounded-xl bg-orange-100 text-orange-800 border border-orange-200";
+                iconEl.innerHTML = '<i class="fas fa-book-reader text-orange-500"></i>';
+                iconEl.className = "w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-4 text-5xl bg-orange-50";
+            }
+
+            const errContainer = document.getElementById('errors-container');
+            if (quizScore < quizQuestions.length) {
+                document.getElementById('errors-list').innerHTML = errorsHTML;
+                errContainer.classList.remove('hidden');
+            } else {
+                errContainer.classList.add('hidden');
+            }
+
+            prepareCertificate(percent);
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        // Certificate Logic
+        function prepareCertificate(percent) {
+            document.getElementById('cert-name').innerText = userName;
+            document.getElementById('cert-score').innerText = `${quizScore} / ${quizQuestions.length}`;
+            document.getElementById('cert-percent').innerText = `${percent}%`;
+            
+            const date = new Date();
+            const dateStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            document.getElementById('cert-date').innerText = dateStr;
+
+            // Check if native sharing is available for the button
+            if (navigator.share) {
+                document.getElementById('btn-share').classList.remove('hidden');
+            }
+        }
+
+        function showCertificate() {
+            document.getElementById('certificate-container').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // prevent background scrolling
+        }
+
+        function closeCertificate() {
+            if(screenshotMode) toggleScreenshotMode(); // reset if closed
+            document.getElementById('certificate-container').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleScreenshotMode() {
+            const container = document.getElementById('certificate-container');
+            const restoreBtn = document.getElementById('screenshot-restore-btn');
+            
+            screenshotMode = !screenshotMode;
+            
+            if (screenshotMode) {
+                container.classList.add('cert-mode');
+                restoreBtn.classList.remove('hidden');
+            } else {
+                container.classList.remove('cert-mode');
+                restoreBtn.classList.add('hidden');
+            }
+        }
+
+        async function nativeShare() {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'شهادة إنجاز',
+                        text: `حصلت على درجة ${quizScore}/${quizQuestions.length} في درس Too and Enough من إعداد أ. محمد الفيفي.`,
+                        url: window.location.href, // Sharing the app URL as we can't easily generate image blob without external libraries securely across all browsers in a single file without bloating.
+                    });
+                } catch (err) {
+                    console.log('Share canceled or failed', err);
+                }
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check orientation warning for small screens
+            window.addEventListener('resize', checkOrientation);
+            checkOrientation();
+        });
+
+        function checkOrientation() {
+            const certContainer = document.getElementById('certificate-container');
+            if (certContainer.style.display === 'flex' && window.innerWidth < window.innerHeight && window.innerWidth < 600) {
+               // Optional: Show brief toast advising landscape mode
+               // Not strictly required but good for UX.
+            }
+        }
+
+    </script>
+</body>
+</html>
